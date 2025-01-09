@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnlxbdblgsb27"]
+
+[ext_resource type="Script" path="res://scripts/player_ship.gd" id="1_h4803"]
+[ext_resource type="PackedScene" uid="uid://bxv2hfmql2u5k" path="res://scenes/packed_scenes/circle.tscn" id="2_16oq7"]
+
+[node name="Ship" type="CharacterBody2D" groups=["player"]]
+motion_mode = 1
+script = ExtResource("1_h4803")
+acceleration = 5.0
+circle = ExtResource("2_16oq7")
+fire_velocity = 50.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, -20, 13, 15, 0, 5, -13, 15)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.600877, 0.891522, 0.85625, 1)
+polygon = PackedVector2Array(0, -20, 13, 15, 0, 5, -13, 15)
