@@ -16,23 +16,27 @@ func _physics_process(_delta: float) -> void:
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	#var direction_x := Input.get_axis("ui_left", "ui_right")
-	#if direction_x:
-	#	velocity.x = move_toward(velocity.x, direction_x * speed, acceleration)
-	#else:
-	#	velocity.x = move_toward(velocity.x, 0, acceleration)
+	var direction_x := Input.get_axis("ui_left", "ui_right")
+	if direction_x:
+		velocity.x = move_toward(velocity.x, direction_x * speed, acceleration)
+	else:
+		velocity.x = move_toward(velocity.x, 0, acceleration)
 
 	var direction_y := Input.get_axis("ui_up", "ui_down")
 	if direction_y:
 		velocity.y = move_toward(velocity.y, direction_y * speed, acceleration)
 	else:
 		velocity.y = move_toward(velocity.y, 0, acceleration)
+		
 
-	var rotation_var := Input.get_axis("ui_left", "ui_right")
-	if rotation_var:
-		self.rotation = move_toward(self.rotation, rotation_var * speed*.001, acceleration*.001)
-	else:
-		self.rotation = move_toward(self.rotation, 0, acceleration*.001)
+	look_at(get_global_mouse_position())
+	self.rotation+= PI/2
+
+	#var rotation_var := Input.get_axis("ui_left", "ui_right")
+	#if rotation_var:
+	#	self.rotation = move_toward(self.rotation, rotation_var * speed*.001, acceleration*.001)
+	#else:
+	#	self.rotation = move_toward(self.rotation, 0, acceleration*.001)
 
 	move_and_slide()
 
