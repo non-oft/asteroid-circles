@@ -9,14 +9,19 @@ extends CharacterBody2D
 var my_parent
 var crush_detect:Area2D
 
+
+signal shot_fired
+
 func _ready() -> void:
-	my_parent = $".."
+	#my_parent = $".."
 	crush_detect = $"./crush_detect"
-	print(crush_detect)
+	# print(crush_detect)
 
 func _on_body_enter(body):
 	if body.is_in_group("circle"):
 		print(body)
+
+		#note: use CollisionObject2d's 'has_overlapping_bodies' to check for crushing instead of signals? (test)
 
 
 func _physics_process(_delta: float) -> void:
@@ -53,8 +58,9 @@ func _physics_process(_delta: float) -> void:
 
 func check_for_fire():
 	if Input.is_action_just_pressed("fire"):
-		print("shot fired")
-		var this_circle=circle.instantiate()
-		my_parent.add_child(this_circle)
-		this_circle.position = self.position + Vector2.from_angle(self.rotation-(PI/2)) * fire_distance
-		this_circle.linear_velocity = Vector2.from_angle(self.rotation-(PI/2)) * fire_velocity
+		# print("shot fired")
+		shot_fired.emit()
+		#var this_circle=circle.instantiate()
+		#my_parent.add_child(this_circle)
+		#this_circle.position = self.position + Vector2.from_angle(self.rotation-(PI/2)) * fire_distance
+		#this_circle.linear_velocity = Vector2.from_angle(self.rotation-(PI/2)) * fire_velocity
