@@ -5,7 +5,7 @@ var sprite
 
 var size:int:
 	set(value):
-		var circle_scale = value +1
+		var circle_scale = (value*.25) +.4
 		collision.scale = Vector2(circle_scale,circle_scale)
 		sprite.scale = Vector2(circle_scale,circle_scale)
 

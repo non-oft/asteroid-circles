@@ -26,19 +26,20 @@ func _ready() -> void:
 
 func on_shot_fired():
 	# print("shot fired")
-	print(shot_count)
-	var this_circle = circle.instantiate()
-	root_node.add_child(this_circle)
-	this_circle.position = ship.position + Vector2.from_angle(ship.rotation-(PI/2)) * fire_distance
-	this_circle.linear_velocity = Vector2.from_angle(ship.rotation-(PI/2)) * fire_velocity
-	# print(this_circle.get_parent().name)
-	# print(ship.position)
-	current_circle_size = circle_array[shot_count]
-	this_circle.size = current_circle_size
-	print(this_circle.size)
+	if(shot_count<circle_array.size()):
+		print(shot_count)
+		var this_circle = circle.instantiate()
+		root_node.add_child(this_circle)
+		this_circle.position = ship.position + Vector2.from_angle(ship.rotation-(PI/2)) * fire_distance
+		this_circle.linear_velocity = Vector2.from_angle(ship.rotation-(PI/2)) * fire_velocity
+		# print(this_circle.get_parent().name)
+		# print(ship.position)
+		current_circle_size = circle_array[shot_count]
+		this_circle.size = current_circle_size
+		print(this_circle.size)
 
 
-	shot_count += 1
+		shot_count += 1
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
