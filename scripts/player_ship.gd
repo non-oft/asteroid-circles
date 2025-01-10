@@ -7,9 +7,17 @@ extends CharacterBody2D
 @export var fire_distance:float = 30
 @export var fire_velocity:float = 10
 var my_parent
+var crush_detect:Area2D
 
 func _ready() -> void:
 	my_parent = $".."
+	crush_detect = $"./crush_detect"
+	print(crush_detect)
+
+func _on_body_enter(body):
+	if body.is_in_group("circle"):
+		print(body)
+
 
 func _physics_process(_delta: float) -> void:
 	

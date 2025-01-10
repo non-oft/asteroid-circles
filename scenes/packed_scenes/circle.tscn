@@ -3,14 +3,13 @@
 [ext_resource type="Texture2D" uid="uid://bt8ro8wm61huq" path="res://sprites/circle_temp.png" id="1_8gisg"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f2x8m"]
-friction = 0.1
-bounce = 0.2
+friction = 0.0
+bounce = 0.5
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ix17a"]
 
-[node name="Circle" type="RigidBody2D"]
-collision_layer = 2
-collision_mask = 2
+[node name="Circle" type="RigidBody2D" groups=["circle"]]
+mass = 0.025
 physics_material_override = SubResource("PhysicsMaterial_f2x8m")
 gravity_scale = 0.0
 
