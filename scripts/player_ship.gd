@@ -3,10 +3,10 @@ extends CharacterBody2D
 
 @export var speed:float = 300.0
 @export var acceleration:float = 20
-@export var circle:PackedScene
-@export var fire_distance:float = 30
-@export var fire_velocity:float = 10
-var my_parent
+#@export var circle:PackedScene
+#@export var fire_distance:float = 30
+#@export var fire_velocity:float = 10
+#var my_parent
 var crush_detect:Area2D
 
 

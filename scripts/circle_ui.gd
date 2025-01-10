@@ -1,20 +1,17 @@
-extends RigidBody2D
+extends Control
 
-var collision
-var sprite
-
+var circle_index:int
 var circle_size:int:
 	set(value):
 		var circle_scale = (value*.25) +.4
+		print("circle scale ", circle_scale)
 		#TODO fix magic numbers?
-		collision.scale = Vector2(circle_scale,circle_scale)
 		sprite.scale = Vector2(circle_scale,circle_scale)
+var sprite
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	collision = $"./CollisionShape2D"
 	sprite = $"./Node2D"
-	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

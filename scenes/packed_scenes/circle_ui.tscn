@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cv07kcxkrys4i"]
+
+[ext_resource type="Texture2D" uid="uid://bt8ro8wm61huq" path="res://sprites/circle_temp.png" id="1_jsrlv"]
+[ext_resource type="Script" path="res://scripts/circle_ui.gd" id="1_qd6e7"]
+
+[node name="Control" type="Control"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_qd6e7")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_jsrlv")
