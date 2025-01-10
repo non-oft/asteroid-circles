@@ -10,6 +10,7 @@ var root_node
 var ship
 var circle_array = []
 var shot_count := 0
+var current_circle_size
 
 
 # Called when the node enters the scene tree for the first time.
@@ -25,14 +26,19 @@ func _ready() -> void:
 
 func on_shot_fired():
 	# print("shot fired")
-	shot_count += 1
 	print(shot_count)
-	var this_circle=circle.instantiate()
+	var this_circle = circle.instantiate()
 	root_node.add_child(this_circle)
 	this_circle.position = ship.position + Vector2.from_angle(ship.rotation-(PI/2)) * fire_distance
 	this_circle.linear_velocity = Vector2.from_angle(ship.rotation-(PI/2)) * fire_velocity
 	# print(this_circle.get_parent().name)
-	print(ship.position)
+	# print(ship.position)
+	current_circle_size = circle_array[shot_count]
+	this_circle.size = current_circle_size
+	print(this_circle.size)
+
+
+	shot_count += 1
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
