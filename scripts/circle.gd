@@ -3,6 +3,9 @@ extends RigidBody2D
 @onready var collision = $"./CollisionShape2D"
 @onready var sprite = $"./Node2D"
 @onready var prox_detect = $"./ProxDetect"
+@export var attraction_strength_mult :float = 1
+@export var repulsion_strength_mult :float = 100
+
 
 var circle_size:int:
 	set(value):
@@ -15,29 +18,30 @@ var circle_size:int:
 		#TODO fix magic numbers?
 		prox_detect.scale = Vector2(prox_scale,prox_scale)
 		sprite.scale = Vector2(prox_scale,prox_scale)
+		circle_size = value
 
 
-func prox_detect_entered(body):
-	if body.is_in_group("circle"):
-		
-			print("balls close")
+
 
 
 
 func collision_detect(body):
-	print("collision detected")
+	#print("collision detected")
 	if body.is_in_group("circle"):
-		if body.circle_size == circle_size:
-			print("balls touched")
-		else:
-			print ("mismatched balls touched")
+		if body.circle_size == self.circle_size:
+			print("balls touched: ", body.circle_size, " ", self.circle_size)
+
+
+		#else:
+			
+			#print ("mismatched balls touched")
+			#pass
 
 
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	prox_detect.body_entered.connect(prox_detect_entered)
 	self.body_entered.connect(collision_detect)
 	pass # Replace with function body.
 
@@ -53,8 +57,14 @@ func _physics_process(_delta: float) -> void:
 		for body in bodies_prox:
 			
 			if body.is_in_group("circle") and body != self:
-				print(self.position.distance_to(body.position))
-			elif body.is_in_group("player"):
-				print("ship prox")
+				var distance = self.position.distance_to(body.position)
+				var direction = self.position.direction_to(body.position)
+				self.linear_velocity += direction * (1/distance) * attraction_strength_mult
 			
-	pass
+			
+			elif body.is_in_group("player"):
+				var distance = self.position.distance_to(body.position)
+				var direction = self.position.direction_to(body.position)
+				body.velocity += -direction * (1/distance) * repulsion_strength_mult
+				#TODO: doesn't seem to be working?
+				
