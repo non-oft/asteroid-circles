@@ -8,6 +8,7 @@
 
 [node name="Ship" type="CharacterBody2D" groups=["player"]]
 motion_mode = 1
+wall_min_slide_angle = 0.0
 script = ExtResource("1_h4803")
 acceleration = 15.0
 

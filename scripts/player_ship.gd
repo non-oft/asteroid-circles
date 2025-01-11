@@ -41,7 +41,7 @@ func _physics_process(_delta: float) -> void:
 		velocity.y = move_toward(velocity.y, direction_y * speed, acceleration)
 	else:
 		velocity.y = move_toward(velocity.y, 0, acceleration)
-		
+		#TODO: global scope clamp on simple addition of acceleration modified inputs instead of resetting every cycle?
 
 	look_at(get_global_mouse_position())
 	self.rotation+= PI/2

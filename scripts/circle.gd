@@ -4,7 +4,7 @@ extends RigidBody2D
 @onready var sprite = $"./Node2D"
 @onready var prox_detect = $"./ProxDetect"
 @export var attraction_strength_mult :float = 1
-@export var repulsion_strength_mult :float = 100
+@export var repulsion_strength_mult :float = 1000
 
 
 var circle_size:int:
@@ -18,7 +18,10 @@ var circle_size:int:
 		#TODO fix magic numbers?
 		prox_detect.scale = Vector2(prox_scale,prox_scale)
 		sprite.scale = Vector2(prox_scale,prox_scale)
+
 		circle_size = value
+		#TODO clean this up?
+	
 
 
 
@@ -65,6 +68,8 @@ func _physics_process(_delta: float) -> void:
 			elif body.is_in_group("player"):
 				var distance = self.position.distance_to(body.position)
 				var direction = self.position.direction_to(body.position)
-				body.velocity += -direction * (1/distance) * repulsion_strength_mult
+				var ship_velocity_add = direction * (1/distance) * repulsion_strength_mult
+				body.velocity += ship_velocity_add
+				print(ship_velocity_add)
 				#TODO: doesn't seem to be working?
 				
