@@ -4,7 +4,9 @@ var circle_index:int
 var circle_size:int:
 	set(value):
 		var circle_scale = (value*.25) +.4
-		print("circle scale ", circle_scale)
+		if circle_scale < .4:
+			circle_scale = 0
+		#print("circle scale ", circle_scale)
 		#TODO fix magic numbers?
 		sprite.scale = Vector2(circle_scale,circle_scale)
 var sprite

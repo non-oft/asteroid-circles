@@ -13,6 +13,7 @@ acceleration = 15.0
 
 [node name="FiringSystem" type="Node2D" parent="."]
 script = ExtResource("3_7lcdw")
+level_circle_count = 50
 circle = ExtResource("2_16oq7")
 
 [node name="crush_detect" type="Area2D" parent="."]
@@ -44,9 +45,6 @@ offset_bottom = 70.0
 theme_override_constants/separation = 0
 script = ExtResource("4_ttudd")
 circle = ExtResource("5_eotgi")
-
-[node name="Control" parent="CanvasLayer/UI_CircleFeed" instance=ExtResource("5_eotgi")]
-layout_mode = 2
 
 [connection signal="shot_fired" from="." to="FiringSystem" method="on_shot_fired"]
 [connection signal="body_entered" from="crush_detect" to="." method="_on_body_enter"]

@@ -19,7 +19,8 @@ func _ready() -> void:
 
 func _on_body_enter(body):
 	if body.is_in_group("circle"):
-		print(body)
+		pass
+		#print(body)
 
 		#note: use CollisionObject2d's 'has_overlapping_bodies' to check for crushing instead of signals? (test)
 

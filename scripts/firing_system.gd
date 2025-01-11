@@ -10,32 +10,30 @@ extends Node2D
 ##Distance from center of ship model circles will be shot from
 @export_range(0,300) var fire_distance:float = 35
 @export var fire_velocity:float = 250
-var root_node
-var ship
+@onready var root_node = get_tree().get_root().get_node("Main")
+@onready var ship = $".."
 var circle_array = []
 var shot_count := 0
 var current_circle_size
-var ui_circle_feed
+@onready var ui_circle_feed = $"../CanvasLayer/UI_CircleFeed"
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	ui_circle_feed = $"../CanvasLayer/UI_CircleFeed"
-	ship = $".."
-	root_node = get_tree().get_root().get_node("Main")
+	
 	for index in range(level_circle_count):
 		var random = randi_range(0,level_circle_range)
-		print(random)
+		#print(random)
 		circle_array.append(random)
 
-	print(circle_array)
+	#print(circle_array)
 
 	ui_circle_feed.circle_array = circle_array
 
 func on_shot_fired():
 	# print("shot fired")
 	if(shot_count<circle_array.size()):
-		print(shot_count)
+		
 		var this_circle = circle.instantiate()
 		root_node.add_child(this_circle)
 		this_circle.position = ship.position + Vector2.from_angle(ship.rotation-(PI/2)) * fire_distance
@@ -44,13 +42,13 @@ func on_shot_fired():
 		# print(ship.position)
 		current_circle_size = circle_array[shot_count]
 		this_circle.circle_size = current_circle_size
-		print(this_circle.circle_size)
+		#print(this_circle.circle_size)
 
 
 		shot_count += 1
-
-		ui_circle_feed.shot_count = shot_count
-		#TODO ^not updating properly
+		print("firing system shot count: ", shot_count)
+		ui_circle_feed.ui_shot_count = shot_count
+		#TODO ^not updating properly?
 		ui_circle_feed.label.text = str(shot_count)
 
 	else:
