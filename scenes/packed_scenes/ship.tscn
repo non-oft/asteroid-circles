@@ -8,9 +8,11 @@
 
 [node name="Ship" type="CharacterBody2D" groups=["player"]]
 motion_mode = 1
-wall_min_slide_angle = 0.0
+wall_min_slide_angle = 0.0174533
 script = ExtResource("1_h4803")
+max_speed = 400.0
 acceleration = 15.0
+deceleration = 15.0
 
 [node name="FiringSystem" type="Node2D" parent="."]
 script = ExtResource("3_7lcdw")

@@ -4,7 +4,7 @@ extends RigidBody2D
 @onready var sprite = $"./Node2D"
 @onready var prox_detect = $"./ProxDetect"
 @export var attraction_strength_mult :float = 1
-@export var repulsion_strength_mult :float = 1000
+@export var repulsion_strength_mult :float = 50
 
 
 var circle_size:int:
@@ -25,14 +25,14 @@ var circle_size:int:
 
 
 
-
-
-
 func collision_detect(body):
 	#print("collision detected")
 	if body.is_in_group("circle"):
-		if body.circle_size == self.circle_size:
-			print("balls touched: ", body.circle_size, " ", self.circle_size)
+		if body.circle_size == self.circle_size and not self.is_queued_for_deletion():
+			body.queue_free()
+			self.linear_velocity = (self.linear_velocity+body.linear_velocity)/2
+			self.position = (self.position+body.position)/2
+			self.circle_size += 1
 
 
 		#else:
@@ -69,7 +69,13 @@ func _physics_process(_delta: float) -> void:
 				var distance = self.position.distance_to(body.position)
 				var direction = self.position.direction_to(body.position)
 				var ship_velocity_add = direction * (1/distance) * repulsion_strength_mult
-				body.velocity += ship_velocity_add
-				print(ship_velocity_add)
-				#TODO: doesn't seem to be working?
+				if body.velocity.x + ship_velocity_add.x < 1.5*body.max_speed and body.velocity.x + ship_velocity_add.x > 1.5*-body.max_speed:
+					body.velocity.x += ship_velocity_add.x
+				if body.velocity.y + ship_velocity_add.y < 1.5*body.max_speed and body.velocity.y + ship_velocity_add.y > 1.5*-body.max_speed:
+					body.velocity.y += ship_velocity_add.y 
+				#print(ship_velocity_add)
+
+				#TODO: maybe do this in crush detection instead, using that detection radius? Much more subtle, less obtrusive/counter-intuitive
+				#than unpredictable slow drift away from circles while trying to stay still
+				
 				
