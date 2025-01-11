@@ -45,3 +45,16 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	pass
+
+func _physics_process(_delta: float) -> void:
+
+	var bodies_prox = prox_detect.get_overlapping_bodies()
+	if bodies_prox.size() > 0:
+		for body in bodies_prox:
+			
+			if body.is_in_group("circle") and body != self:
+				print(self.position.distance_to(body.position))
+			elif body.is_in_group("player"):
+				print("ship prox")
+			
+	pass
