@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://bxv2hfmql2u5k"]
+
+[ext_resource type="Texture2D" uid="uid://bt8ro8wm61huq" path="res://sprites/circle_temp.png" id="1_8gisg"]
+[ext_resource type="Script" path="res://scripts/circle.gd" id="1_msj54"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f2x8m"]
+friction = 0.0
+bounce = 0.5
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ix17a"]
+radius = 18.41
+
+[node name="Circle" type="RigidBody2D" groups=["circle"]]
+mass = 0.025
+physics_material_override = SubResource("PhysicsMaterial_f2x8m")
+gravity_scale = 0.0
+script = ExtResource("1_msj54")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_8gisg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ix17a")
