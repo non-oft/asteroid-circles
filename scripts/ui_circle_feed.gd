@@ -17,7 +17,7 @@ var ui_shot_count = 0:
 				child.circle_size = circle_array[shot_count+child.circle_index]
 			else:
 				child.circle_size = -1
-				#TODO: for some reason instance indices 0 and 1 both seem to be getting set to the same size no matter what?
+				
 
 
 #func increment_circles_animation_start():
