@@ -30,15 +30,14 @@ func collision_detect(body):
 	if body.is_in_group("circle"):
 		if body.circle_size == self.circle_size and not self.is_queued_for_deletion():
 			body.queue_free()
-			self.linear_velocity = (self.linear_velocity+body.linear_velocity)/2
-			self.position = (self.position+body.position)/2
+			body.set_collision_layer_value(1,false)
+			body.set_collision_mask_value(1,false)
+			self.linear_velocity = (self.linear_velocity+body.linear_velocity)/2.0
+			self.position = (self.position+body.position)/2.0
+			print("self position: ", self.position, ". colliding circle position: ", body.position, ". average: ", (self.position+body.position)/2.0)
+			print("self velocity: ", self.linear_velocity, ". colliding circle velocity: ", body.linear_velocity, ". average: ", (self.linear_velocity+body.linear_velocity)/2.0)
 			self.circle_size += 1
-
-
-		#else:
-			
-			#print ("mismatched balls touched")
-			#pass
+			#TODO: because velocities are being averaged after collision, behavior is a bit strange; not sure of a good fix but might be worth giving some thought
 
 
 
@@ -46,7 +45,6 @@ func collision_detect(body):
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	self.body_entered.connect(collision_detect)
-	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -75,7 +73,8 @@ func _physics_process(_delta: float) -> void:
 					body.velocity.y += ship_velocity_add.y 
 				#print(ship_velocity_add)
 
-				#TODO: maybe do this in crush detection instead, using that detection radius? Much more subtle, less obtrusive/counter-intuitive
+				#TODO: maybe do ship repulsion in crush detection instead, using that detection area? Much more subtle, less obtrusive/counter-intuitive
 				#than unpredictable slow drift away from circles while trying to stay still
+				#Might be good to have ship slightly push *away* circles as well, though
 				
 				

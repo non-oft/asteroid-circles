@@ -10,7 +10,7 @@ var circle_array
 var ui_shot_count = 0:
 	set(value):
 		var shot_count = value
-		print("ui shot count variable updated; is now ", shot_count)
+		#print("ui shot count variable updated; is now ", shot_count)
 		#increment_circles_animation_start()
 		for child in get_children():
 			if circle_array.size() > shot_count+child.circle_index:
