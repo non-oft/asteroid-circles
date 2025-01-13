@@ -46,7 +46,7 @@ func on_shot_fired():
 
 
 		shot_count += 1
-		print("firing system shot count: ", shot_count)
+		#print("firing system shot count: ", shot_count)
 		ui_circle_feed.ui_shot_count = shot_count
 		#TODO ^not updating properly?
 		ui_circle_feed.label.text = str(shot_count)
