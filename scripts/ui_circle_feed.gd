@@ -2,7 +2,6 @@ extends VBoxContainer
 
 @export var preview_number = 6
 var circle_array
-@onready var label = $"../Label"
 @export var circle:PackedScene
 
 var ui_shot_count = 0:

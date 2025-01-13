@@ -41,7 +41,6 @@ func on_shot_fired():
 		shot_count += 1
 		ui_circle_feed.ui_shot_count = shot_count
 		#TODO ^not updating properly?
-		ui_circle_feed.label.text = str(shot_count)
 
 	else:
 		print("out of shots")
