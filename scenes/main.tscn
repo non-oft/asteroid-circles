@@ -1,32 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://510gfcijg5py"]
+[gd_scene load_steps=2 format=3 uid="uid://510gfcijg5py"]
 
 [ext_resource type="PackedScene" uid="uid://bnlxbdblgsb27" path="res://scenes/packed_scenes/ship.tscn" id="1_epkud"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gh5w3"]
-size = Vector2(1163.5, 45)
 
 [node name="Main" type="Node2D"]
 
 [node name="Ship" parent="." instance=ExtResource("1_epkud")]
-position = Vector2(100, 100)
+position = Vector2(465, 308)
 
-[node name="walls_temporary" type="StaticBody2D" parent="."]
-position = Vector2(-11, 6)
+[node name="Arena" type="StaticBody2D" parent="."]
+position = Vector2(576, 316)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="walls_temporary"]
-position = Vector2(575.5, 12.5)
-shape = SubResource("RectangleShape2D_gh5w3")
+[node name="Polygon2D" type="Polygon2D" parent="Arena"]
+color = Color(0.270351, 0.165992, 0.16267, 1)
+invert_enabled = true
+invert_border = 20.0
+polygon = PackedVector2Array(-250, -150, 250, -150, 250, 150, -250, 150)
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="walls_temporary"]
-position = Vector2(581, 639)
-shape = SubResource("RectangleShape2D_gh5w3")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="walls_temporary"]
-position = Vector2(14, 302)
-rotation = 1.5708
-shape = SubResource("RectangleShape2D_gh5w3")
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="walls_temporary"]
-position = Vector2(1143, 314)
-rotation = 1.5708
-shape = SubResource("RectangleShape2D_gh5w3")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Arena"]
+build_mode = 1
+polygon = PackedVector2Array(-251, -151, 249, -149, 250, 150, -250, 151)
