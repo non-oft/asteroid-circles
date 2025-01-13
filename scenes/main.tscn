@@ -1,21 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://510gfcijg5py"]
+[gd_scene load_steps=3 format=3 uid="uid://510gfcijg5py"]
 
 [ext_resource type="PackedScene" uid="uid://bnlxbdblgsb27" path="res://scenes/packed_scenes/ship.tscn" id="1_epkud"]
+[ext_resource type="PackedScene" uid="uid://bu7drcej5akpl" path="res://scenes/arena.tscn" id="2_t5c6q"]
 
 [node name="Main" type="Node2D"]
 
 [node name="Ship" parent="." instance=ExtResource("1_epkud")]
 position = Vector2(465, 308)
 
-[node name="Arena" type="StaticBody2D" parent="."]
-position = Vector2(576, 316)
-
-[node name="Polygon2D" type="Polygon2D" parent="Arena"]
-color = Color(0.270351, 0.165992, 0.16267, 1)
-invert_enabled = true
-invert_border = 20.0
-polygon = PackedVector2Array(-250, -150, 250, -150, 250, 150, -250, 150)
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Arena"]
-build_mode = 1
-polygon = PackedVector2Array(-251, -151, 249, -149, 250, 150, -250, 151)
+[node name="Arena" parent="." instance=ExtResource("2_t5c6q")]

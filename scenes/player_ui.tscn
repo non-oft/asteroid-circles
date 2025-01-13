@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://5jfrwtjm7yow"]
+
+[ext_resource type="Script" path="res://scripts/score_counter.gd" id="1_so64b"]
+[ext_resource type="Script" path="res://scripts/ui_circle_feed.gd" id="2_uyahe"]
+[ext_resource type="PackedScene" uid="uid://cv07kcxkrys4i" path="res://scenes/packed_scenes/circle_ui.tscn" id="3_femim"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_mym6a"]
+font_size = 32
+outline_size = 9
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 20
+shadow_color = Color(0, 0, 0, 0.164706)
+shadow_offset = Vector2(-3.375, 2.345)
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="ScoreCounter" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -65.0
+offset_bottom = 23.0
+grow_horizontal = 0
+text = "test text"
+label_settings = SubResource("LabelSettings_mym6a")
+script = ExtResource("1_so64b")
+
+[node name="UI_CircleFeed" type="VBoxContainer" parent="."]
+offset_left = 30.0
+offset_top = 30.0
+offset_right = 70.0
+offset_bottom = 70.0
+theme_override_constants/separation = 0
+script = ExtResource("2_uyahe")
+circle = ExtResource("3_femim")

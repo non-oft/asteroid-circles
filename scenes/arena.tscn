@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://bu7drcej5akpl"]
+
+[ext_resource type="Script" path="res://scripts/arena.gd" id="1_tynxy"]
+
+[node name="Arena" type="StaticBody2D"]
+position = Vector2(576, 316)
+script = ExtResource("1_tynxy")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.270351, 0.165992, 0.16267, 1)
+invert_enabled = true
+invert_border = 20.0
+polygon = PackedVector2Array(-250, -150, 250, -150, 250, 150, -250, 150)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+build_mode = 1
+polygon = PackedVector2Array(-251, -151, 249, -149, 250, 150, -250, 151)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.9, 1.9)
+position_smoothing_enabled = true
+position_smoothing_speed = 1.0
