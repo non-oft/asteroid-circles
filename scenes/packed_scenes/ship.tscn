@@ -1,10 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://bnlxbdblgsb27"]
+[gd_scene load_steps=8 format=3 uid="uid://bnlxbdblgsb27"]
 
 [ext_resource type="Script" path="res://scripts/player_ship.gd" id="1_h4803"]
 [ext_resource type="PackedScene" uid="uid://bxv2hfmql2u5k" path="res://scenes/packed_scenes/circle.tscn" id="2_16oq7"]
 [ext_resource type="Script" path="res://scripts/firing_system.gd" id="3_7lcdw"]
+[ext_resource type="Script" path="res://scripts/score_counter.gd" id="4_ld3mo"]
 [ext_resource type="Script" path="res://scripts/ui_circle_feed.gd" id="4_ttudd"]
 [ext_resource type="PackedScene" uid="uid://cv07kcxkrys4i" path="res://scenes/packed_scenes/circle_ui.tscn" id="5_eotgi"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_mym6a"]
+font_size = 32
+outline_size = 9
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 20
+shadow_color = Color(0, 0, 0, 0.164706)
+shadow_offset = Vector2(-3.375, 2.345)
 
 [node name="Ship" type="CharacterBody2D" groups=["player"]]
 motion_mode = 1
@@ -35,10 +44,16 @@ polygon = PackedVector2Array(0, -20, 13, 15, 0, 5, -13, 15)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Label" type="Label" parent="CanvasLayer"]
-offset_right = 40.0
+[node name="ScoreCounter" type="Label" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -65.0
 offset_bottom = 23.0
+grow_horizontal = 0
 text = "test text"
+label_settings = SubResource("LabelSettings_mym6a")
+script = ExtResource("4_ld3mo")
 
 [node name="UI_CircleFeed" type="VBoxContainer" parent="CanvasLayer"]
 offset_left = 30.0
