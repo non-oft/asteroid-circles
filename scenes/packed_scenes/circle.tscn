@@ -4,8 +4,7 @@
 [ext_resource type="Script" path="res://scripts/circle.gd" id="1_msj54"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f2x8m"]
-friction = 0.0
-bounce = 0.5
+friction = 0.17
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_natwm"]
 radius = 50.0
