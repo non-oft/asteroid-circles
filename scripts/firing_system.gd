@@ -23,11 +23,7 @@ func _ready() -> void:
 	
 	for index in range(level_circle_count):
 		var random = randi_range(0,level_circle_range)
-		#print(random)
 		circle_array.append(random)
-
-	#print(circle_array)
-
 	ui_circle_feed.circle_array = circle_array
 
 func on_shot_fired():
@@ -38,15 +34,11 @@ func on_shot_fired():
 		root_node.add_child(this_circle)
 		this_circle.position = ship.position + Vector2.from_angle(ship.rotation-(PI/2)) * fire_distance
 		this_circle.linear_velocity = Vector2.from_angle(ship.rotation-(PI/2)) * fire_velocity
-		# print(this_circle.get_parent().name)
-		# print(ship.position)
 		current_circle_size = circle_array[shot_count]
 		this_circle.circle_size = current_circle_size
-		#print(this_circle.circle_size)
 
 
 		shot_count += 1
-		#print("firing system shot count: ", shot_count)
 		ui_circle_feed.ui_shot_count = shot_count
 		#TODO ^not updating properly?
 		ui_circle_feed.label.text = str(shot_count)
@@ -55,6 +47,3 @@ func on_shot_fired():
 		print("out of shots")
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass

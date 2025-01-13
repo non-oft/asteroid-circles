@@ -26,7 +26,6 @@ var circle_size:int:
 
 
 func collision_detect(body):
-	#print("collision detected")
 	if body.is_in_group("circle"):
 		if body.circle_size == self.circle_size and not self.is_queued_for_deletion():
 			body.queue_free()
@@ -58,23 +57,27 @@ func _physics_process(_delta: float) -> void:
 		for body in bodies_prox:
 			
 			if body.is_in_group("circle") and body != self:
-				var distance = self.position.distance_to(body.position)
-				var direction = self.position.direction_to(body.position)
-				self.linear_velocity += direction * (1/distance) * attraction_strength_mult
+				_gravitate_circles(body)
 			
 			
 			elif body.is_in_group("player"):
-				var distance = self.position.distance_to(body.position)
-				var direction = self.position.direction_to(body.position)
-				var ship_velocity_add = direction * (1/distance) * repulsion_strength_mult
-				if body.velocity.x + ship_velocity_add.x < 1.5*body.max_speed and body.velocity.x + ship_velocity_add.x > 1.5*-body.max_speed:
-					body.velocity.x += ship_velocity_add.x
-				if body.velocity.y + ship_velocity_add.y < 1.5*body.max_speed and body.velocity.y + ship_velocity_add.y > 1.5*-body.max_speed:
-					body.velocity.y += ship_velocity_add.y 
-				#print(ship_velocity_add)
+				_repel_player(body)
+				
+				
+func _gravitate_circles(circle):
+	var distance = self.position.distance_to(circle.position)
+	var direction = self.position.direction_to(circle.position)
+	self.linear_velocity += direction * (1/distance) * attraction_strength_mult
 
-				#TODO: maybe do ship repulsion in crush detection instead, using that detection area? Much more subtle, less obtrusive/counter-intuitive
-				#than unpredictable slow drift away from circles while trying to stay still
-				#Might be good to have ship slightly push *away* circles as well, though
-				
-				
+func _repel_player(player):
+	var distance = self.position.distance_to(player.position)
+	var direction = self.position.direction_to(player.position)
+	var ship_velocity_add = direction * (1/distance) * repulsion_strength_mult
+	if player.velocity.x + ship_velocity_add.x < 1.5*player.max_speed and player.velocity.x + ship_velocity_add.x > 1.5*-player.max_speed:
+		player.velocity.x += ship_velocity_add.x
+	if player.velocity.y + ship_velocity_add.y < 1.5*player.max_speed and player.velocity.y + ship_velocity_add.y > 1.5*-player.max_speed:
+		player.velocity.y += ship_velocity_add.y 
+
+	#TODO: maybe do ship repulsion in crush detection instead, using that detection area? Much more subtle, less obtrusive/counter-intuitive
+	#than unpredictable slow drift away from circles while trying to stay still
+	#Might be good to have ship slightly push *away* circles as well, though
