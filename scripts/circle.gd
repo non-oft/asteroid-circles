@@ -63,14 +63,14 @@ func _physics_process(_delta: float) -> void:
 				self.linear_velocity += direction * (1/distance) * attraction_strength_mult
 			
 			
-			elif body.is_in_group("player"):
-				var distance = self.position.distance_to(body.position)
-				var direction = self.position.direction_to(body.position)
-				var ship_velocity_add = direction * (1/distance) * repulsion_strength_mult
-				if body.velocity.x + ship_velocity_add.x < 1.5*body.max_speed and body.velocity.x + ship_velocity_add.x > 1.5*-body.max_speed:
-					body.velocity.x += ship_velocity_add.x
-				if body.velocity.y + ship_velocity_add.y < 1.5*body.max_speed and body.velocity.y + ship_velocity_add.y > 1.5*-body.max_speed:
-					body.velocity.y += ship_velocity_add.y 
+			#elif body.is_in_group("player"):
+				#var distance = self.position.distance_to(body.position)
+				#var direction = self.position.direction_to(body.position)
+				#var ship_velocity_add = direction * (1/distance) * repulsion_strength_mult
+				#if body.velocity.x + ship_velocity_add.x < 1.5*body.max_speed and body.velocity.x + ship_velocity_add.x > 1.5*-body.max_speed:
+					#body.velocity.x += ship_velocity_add.x
+				#if body.velocity.y + ship_velocity_add.y < 1.5*body.max_speed and body.velocity.y + ship_velocity_add.y > 1.5*-body.max_speed:
+					#body.velocity.y += ship_velocity_add.y 
 				#print(ship_velocity_add)
 
 				#TODO: maybe do ship repulsion in crush detection instead, using that detection area? Much more subtle, less obtrusive/counter-intuitive
