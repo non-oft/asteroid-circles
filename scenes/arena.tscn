@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://scripts/arena.gd" id="1_tynxy"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_r6g6f"]
-radius = 115.27
+[sub_resource type="CircleShape2D" id="CircleShape2D_xtnno"]
+radius = 24.0208
 
 [node name="Arena" type="StaticBody2D"]
 position = Vector2(576, 316)
@@ -14,10 +14,6 @@ color = Color(0.270351, 0.165992, 0.16267, 1)
 invert_enabled = true
 invert_border = 20.0
 polygon = PackedVector2Array(-250, -150, 250, -150, 250, 150, -250, 150)
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-build_mode = 1
-polygon = PackedVector2Array(-9, -147, 104, -134, 169, -86, 195, -13, 182, 60, 135, 113, 59, 139, -15, 144, -104, 130, -160, 92, -183, 53, -193, -1, -181, -51, -160, -84, -104, -134)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.9, 1.9)
@@ -33,4 +29,4 @@ button_mask = 2
 text = "oh no the gravity"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_r6g6f")
+shape = SubResource("CircleShape2D_xtnno")
