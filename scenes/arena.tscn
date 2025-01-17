@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://bu7drcej5akpl"]
+
+[ext_resource type="Script" path="res://scripts/arena.gd" id="1_tynxy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xtnno"]
+radius = 24.0208
+
+[node name="Arena" type="StaticBody2D"]
+position = Vector2(576, 316)
+script = ExtResource("1_tynxy")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.270351, 0.165992, 0.16267, 1)
+invert_enabled = true
+invert_border = 20.0
+polygon = PackedVector2Array(-250, -150, 250, -150, 250, 150, -250, 150)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.9, 1.9)
+position_smoothing_enabled = true
+position_smoothing_speed = 1.0
+
+[node name="GravityButton" type="Button" parent="."]
+offset_left = -254.0
+offset_top = -164.0
+offset_right = -114.0
+offset_bottom = -133.0
+button_mask = 2
+text = "oh no the gravity"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_xtnno")
