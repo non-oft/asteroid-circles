@@ -5,6 +5,9 @@ extends CharacterBody2D
 @export var acceleration:float = 20
 @export var deceleration:float = 1.5
 @onready var crush_detect:Area2D = $"./crush_detect"
+var crush_timer:float = 0
+@export var crush_time:float = 10
+@export var crush_detect_nudge_strength:float = 20
 
 
 signal shot_fired
@@ -46,6 +49,31 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 	check_for_fire()
+
+	#crush detection and ship nudging (attempting to minimally move ship out of danger):
+	#print(crush_detect.get_overlapping_bodies().filter(func(body): return body.is_in_group("circle")))
+	if crush_detect.get_overlapping_bodies().filter(func(body): return body.is_in_group("circle")):
+		crush_timer += 1.0/60
+		print("ship is being crushed! :o ",crush_timer)
+	else:
+		if crush_timer > 0:
+			crush_timer -= crush_time/3
+		else:
+			crush_timer = 0
+
+	if crush_timer >= crush_time:
+		crush_timer = crush_time
+		print("ship has been crushed :(")
+
+	for body in crush_detect.get_overlapping_bodies():
+		if body.is_in_group("circle"):
+			self.velocity += Vector2(1,1)/(self.position-body.position)*crush_detect_nudge_strength
+
+	#(not doing crush detection or nudging for walls for now because it seems like they may not exist soon...?)
+	#TODO: nudge doesn't prevent the player from just rubbing their face on a circle until they get 'crushed', because of the way movement is being handled
+	#not sure how to elegantly fix, but that's not intended behavior
+
+
 
 
 func check_for_fire():

@@ -62,8 +62,9 @@ func _physics_process(_delta: float) -> void:
 				_gravitate_circles(body)
 			
 			
-			elif body.is_in_group("player"):
-				_repel_player(body)
+
+			#elif body.is_in_group("player"):
+				#_repel_player(body)
 				
 				
 func _gravitate_circles(circle):
