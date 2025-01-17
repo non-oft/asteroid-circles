@@ -66,7 +66,7 @@ func _physics_process(_delta: float) -> void:
 
 	check_for_fire()
 
-	#crush detection and ship nudging:
+	#crush detection and ship nudging (attempting to minimally move ship out of danger):
 	#print(crush_detect.get_overlapping_bodies().filter(func(body): return body.is_in_group("circle")))
 	if crush_detect.get_overlapping_bodies().filter(func(body): return body.is_in_group("circle")):
 		crush_timer += 1.0/60
