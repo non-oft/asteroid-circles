@@ -33,11 +33,11 @@ func collision_detect(body):
 			body.set_collision_mask_value(1,false)
 			self.linear_velocity = (self.linear_velocity+body.linear_velocity)/2.0
 			self.position = (self.position+body.position)/2.0
-			print("self position: ", self.position, ". colliding circle position: ", body.position, ". average: ", (self.position+body.position)/2.0)
-			print("self velocity: ", self.linear_velocity, ". colliding circle velocity: ", body.linear_velocity, ". average: ", (self.linear_velocity+body.linear_velocity)/2.0)
+			#print("self position: ", self.position, ". colliding circle position: ", body.position, ". average: ", (self.position+body.position)/2.0)
+			#print("self velocity: ", self.linear_velocity, ". colliding circle velocity: ", body.linear_velocity, ". average: ", (self.linear_velocity+body.linear_velocity)/2.0)
 			self.circle_size += 1
-			ScoreHandler.current_score += circle_size
-			print(ScoreHandler.current_score)
+			ScoreHandler.apply_score(self.position, self.circle_size)
+			#print(ScoreHandler.current_score)
 			#TODO: because velocities are being averaged after collision, behavior is a bit strange; not sure of a good fix but might be worth giving some thought
 
 
