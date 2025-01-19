@@ -28,7 +28,7 @@ var ship_position
 #position where the player's ship currently is
 
 var current_circles: Array
-#array containing all circles that currently exist, with circle size as the index; alternatively maybe this could potentially be a dictionary or something
+#array containing all circles that currently exist; alternatively maybe this could potentially be a dictionary or something
 
 var full_deck: Array
 #array containing all circles in the player's current deck (including those already fired), in the current order
@@ -38,6 +38,13 @@ var deck_index: int
 
 var map_size
 #current size of the map, based on score (to be passed in from elsewhere, not just calculated again here, in case other random nonsense gets factored in somewhere for some reason?)
+
+
+var modifier_variable_1: float
+var modifier_variable_2: float
+var modifier_variable_3: float
+#various simple variables to be used by modifiers in different ways
+
 
 
 
@@ -77,9 +84,30 @@ var shininess_min = .5
 var quality_mult = 1.0
 #multiplier for chances of higher quality modifiers
 
-#modifier shininess and quality application:
-func _ready() -> void:
-    #TODO: add step to set above constants to match or be affected by external factors if applicable prior to shininess/quality calculation
+
+
+#bringing in ui elements, setting text
+
+var modifier_ui_name_label: Label
+var modifier_ui_description_label: Label
+
+var modifier_ui_name:
+    set(text):
+        modifier_ui_name = text
+        modifier_ui_name_label.text = text
+
+var modifier_ui_description:
+    set(text):
+        modifier_ui_description = text
+        modifier_ui_description_label.text = text
+
+
+
+
+func modifier_initialize():
+       
+    #modifier shininess and quality application:
+    #TODO: add step to set q/s constants to match or be affected by external factors if applicable prior to shininess/quality calculation
     var rand_int = randi() % 1000
     var rand_float = randfn(1,shininess_dist)
     if rand_float < shininess_min:
@@ -95,6 +123,19 @@ func _ready() -> void:
         modifier_quality = 1
     else:
         modifier_quality = 0
-    
+	
+    var modifier_ui = preload("res://scenes/packed_scenes/modifier_ui.tscn").instantiate()
+    add_child(modifier_ui)
+    modifier_ui_name_label = $"./ModifierUI/ModifierName"
+    modifier_ui_description_label = $"./ModifierUI/ModifierDescription"
 
-#TODO add ui shape, text, etc. (instantiate another packed scene as child?); set up text to automatically update or something
+
+    modifier_ui_name = "yer modifier's broken, friend"
+    modifier_ui_description = "this here is text y'all shouldn't be seeing unless the game is doing something shall we say more than a bit incorrect"
+
+
+
+
+#function to apply quality and shininess to a given input
+func apply_qs(input) -> float:
+    return (input+modifier_quality)*modifier_shininess
