@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bnlxbdblgsb27"]
+[gd_scene load_steps=9 format=3 uid="uid://bnlxbdblgsb27"]
 
 [ext_resource type="Script" path="res://scripts/player_ship.gd" id="1_h4803"]
 [ext_resource type="PackedScene" uid="uid://bxv2hfmql2u5k" path="res://scenes/packed_scenes/circle.tscn" id="2_16oq7"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scripts/score_counter.gd" id="4_ld3mo"]
 [ext_resource type="Script" path="res://scripts/ui_circle_feed.gd" id="4_ttudd"]
 [ext_resource type="PackedScene" uid="uid://cv07kcxkrys4i" path="res://scenes/packed_scenes/circle_ui.tscn" id="5_eotgi"]
+[ext_resource type="PackedScene" uid="uid://c4rj1nhxck7b3" path="res://scenes/packed_scenes/modifiers/test_modifier.tscn" id="7_a7hj1"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_mym6a"]
 font_size = 32
@@ -63,6 +64,20 @@ offset_bottom = 70.0
 theme_override_constants/separation = 0
 script = ExtResource("4_ttudd")
 circle = ExtResource("5_eotgi")
+
+[node name="UI_Modifiers" type="VBoxContainer" parent="CanvasLayer"]
+custom_minimum_size = Vector2(0, 100)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -127.0
+offset_top = 80.0
+offset_right = -87.0
+offset_bottom = 120.0
+grow_horizontal = 0
+
+[node name="test_modifier" parent="CanvasLayer/UI_Modifiers" instance=ExtResource("7_a7hj1")]
+layout_mode = 2
 
 [connection signal="shot_fired" from="." to="FiringSystem" method="on_shot_fired"]
 [connection signal="body_entered" from="crush_detect" to="." method="_on_body_enter"]

@@ -5,9 +5,14 @@ func calculate(_initial) -> float:
     return 0.0
 #TODO: swap out for proper error?
 
+#path to modifier ui packed scene
+const MODIFIER_UI_PATH = "res://scenes/packed_scenes/modifier_ui.tscn"
+
 
 
 #main variables potentially needed for calculating each score increase:
+
+var modifier_active: bool = true
 
 var circle_size
 #resulting size of currently merging circles
@@ -86,25 +91,26 @@ var quality_mult = 1.0
 
 
 
-#bringing in ui elements, setting text
+#text for ui; label text will be automatically updated as variables are changed
 
 var modifier_ui_name_label: Label
 var modifier_ui_description_label: Label
 
-var modifier_ui_name:
+var modifier_ui_name: String:
     set(text):
         modifier_ui_name = text
         modifier_ui_name_label.text = text
 
-var modifier_ui_description:
+var modifier_ui_description: String:
     set(text):
         modifier_ui_description = text
         modifier_ui_description_label.text = text
 
 
 
+#main initialization, to be called with a ready function in any/all modifiers
 
-func modifier_initialize():
+func modifier_initialize(modifier_ui_name_input: String, modifier_ui_description_input: String):
        
     #modifier shininess and quality application:
     #TODO: add step to set q/s constants to match or be affected by external factors if applicable prior to shininess/quality calculation
@@ -124,14 +130,23 @@ func modifier_initialize():
     else:
         modifier_quality = 0
 	
-    var modifier_ui = preload("res://scenes/packed_scenes/modifier_ui.tscn").instantiate()
+
+    #bringing in ui stuff and setting initial label text:
+
+    var modifier_ui = preload(MODIFIER_UI_PATH).instantiate()
     add_child(modifier_ui)
     modifier_ui_name_label = $"./ModifierUI/ModifierName"
     modifier_ui_description_label = $"./ModifierUI/ModifierDescription"
 
 
-    modifier_ui_name = "yer modifier's broken, friend"
-    modifier_ui_description = "this here is text y'all shouldn't be seeing unless the game is doing something shall we say more than a bit incorrect"
+    if modifier_ui_name_input:
+        modifier_ui_name = modifier_ui_name_input
+    else:
+        modifier_ui_name = "yer modifier's broken, friend"
+    if modifier_ui_description_input:
+        modifier_ui_description = modifier_ui_description_input
+    else:
+        modifier_ui_description = "this here is text y'all shouldn't be seeing unless the game is doing something shall we say more than a bit incorrect"
 
 
 

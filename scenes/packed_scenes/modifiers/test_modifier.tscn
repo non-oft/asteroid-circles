@@ -2,5 +2,9 @@
 
 [ext_resource type="Script" path="res://scripts/modifiers/test_modifier.gd" id="1_j2mgf"]
 
-[node name="test_modifier" type="Node2D"]
+[node name="test_modifier" type="Control"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 3
+anchors_preset = 0
+offset_bottom = 100.0
 script = ExtResource("1_j2mgf")
