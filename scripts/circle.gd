@@ -9,20 +9,6 @@ var circle_size:int:
 	set(value):
 		circle_size = value
 		circle_physics_properties_update(circle_size)
-
-		
-		#var circle_scale = (value*.25) +.4
-		#TODO fix magic numbers?
-		#collision.scale = Vector2(circle_scale,circle_scale)
-		#sprite.scale = Vector2(circle_scale,circle_scale)
-
-		#var prox_scale = (value*.25) +.4
-		#TODO fix magic numbers?
-		#prox_detect.scale = Vector2(prox_scale,prox_scale)
-		#sprite.scale = Vector2(prox_scale,prox_scale)
-
-		#circle_size = value
-		#TODO clean this up?
 	
 
 

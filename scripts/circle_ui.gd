@@ -10,13 +10,6 @@ var circle_size:int:
         circle_size = value
         circle_ui_properties_update(circle_size)
 
-        #var circle_scale = (value*.25) +.4
-        #if circle_scale < .4:
-            #circle_scale = 0
-        #print("circle scale ", circle_scale)
-        #TODO fix magic numbers?
-        #sprite.scale = Vector2(circle_scale,circle_scale)
-
 
 var scale_mult: float = .25
 var scale_addend: float = .4
