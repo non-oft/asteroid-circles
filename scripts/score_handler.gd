@@ -17,6 +17,7 @@ signal points_added(points)
 func _ready() -> void:
     #var test_modifier = preload("res://scenes/packed_scenes/modifiers/test_modifier.tscn").instantiate()
     #add_child(test_modifier)
+    #^this kind of malarkey will be happening in the shop or whatever, not here
     modifiers_array = get_tree().get_root().get_node("Main/Ship/CanvasLayer/UI_Modifiers").get_children()
     print(get_tree().get_root().get_node("Main/Ship/CanvasLayer/UI_Modifiers").get_children())
     pass

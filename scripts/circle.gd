@@ -1,25 +1,27 @@
-extends RigidBody2D
+extends "res://scripts/circle_base.gd"
 
-@onready var collision = $"./CollisionShape2D"
-@onready var sprite = $"./Node2D"
-@onready var prox_detect = $"./ProxDetect"
+
 @export var attraction_strength_mult :float = 1
 @export var repulsion_strength_mult :float = 50
 
 
 var circle_size:int:
 	set(value):
-		var circle_scale = (value*.25) +.4
-		#TODO fix magic numbers?
-		collision.scale = Vector2(circle_scale,circle_scale)
-		sprite.scale = Vector2(circle_scale,circle_scale)
-
-		var prox_scale = (value*.25) +.4
-		#TODO fix magic numbers?
-		prox_detect.scale = Vector2(prox_scale,prox_scale)
-		sprite.scale = Vector2(prox_scale,prox_scale)
-
 		circle_size = value
+		circle_physics_properties_update(circle_size)
+
+		
+		#var circle_scale = (value*.25) +.4
+		#TODO fix magic numbers?
+		#collision.scale = Vector2(circle_scale,circle_scale)
+		#sprite.scale = Vector2(circle_scale,circle_scale)
+
+		#var prox_scale = (value*.25) +.4
+		#TODO fix magic numbers?
+		#prox_detect.scale = Vector2(prox_scale,prox_scale)
+		#sprite.scale = Vector2(prox_scale,prox_scale)
+
+		#circle_size = value
 		#TODO clean this up?
 	
 
