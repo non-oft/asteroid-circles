@@ -2,21 +2,24 @@ extends "res://scripts/modifiers/modifier.gd"
 
 
 func _ready() -> void:
-    modifier_initialize("Test Modifier","Adds 1 to score as it's earned.")
+    modifier_ui_name_raw = ["Test Modifier"]
+    modifier_ui_description_raw = ["Adds ", "[v1]", " to score as it's earned."]
     
-    #TODO: need to establish system/technique for changing numbers/etc, in this case the 1, dynamically as appropriate
-    #will need to update when q/s or the variable(s) or parameters in question change
+    
+    modifier_initialize()
+
+    modifier_variable_1 = 1
+    print ("quality: "+str(modifier_quality)+" shininess: "+str(modifier_shininess)+"; variable 1 raw: "+str(modifier_variable_1)+ " variable 1 qs adjusted: "+str(modifier_variable_1_qs))
+    
+    
 
 
 func calculate(initial) -> float:
 
     if modifier_active:
-
-        modifier_variable_1 = 1
-    
-        apply_qs(modifier_variable_1)
-
-        var result = initial + modifier_variable_1
-        return result
+        var result = initial + modifier_variable_1_qs
+        return floori(result)
     else:
         return initial
+#floor after calculation, before return, not on individual variables (doesn't matter here, but would make a difference in other cases)
+#TODO maybe even floor in the end after all calculations, not within modifiers?

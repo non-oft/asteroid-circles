@@ -79,5 +79,8 @@ grow_horizontal = 0
 [node name="test_modifier" parent="CanvasLayer/UI_Modifiers" instance=ExtResource("7_a7hj1")]
 layout_mode = 2
 
+[node name="test_modifier2" parent="CanvasLayer/UI_Modifiers" instance=ExtResource("7_a7hj1")]
+layout_mode = 2
+
 [connection signal="shot_fired" from="." to="FiringSystem" method="on_shot_fired"]
 [connection signal="body_entered" from="crush_detect" to="." method="_on_body_enter"]
