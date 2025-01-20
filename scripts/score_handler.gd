@@ -24,11 +24,9 @@ func _ready() -> void:
 
 
 func apply_score(_merge_position:Vector2, merge_result_size:int):
-    print("apply_score called with merge_result_size = ", merge_result_size)
+    #print("apply_score called with merge_result_size = ", merge_result_size)
     var score_temp = merge_result_size
     for modifier in modifiers_array:
-        print("should be merged circle size +1: ",modifier.calculate(score_temp))
-
         score_temp =  modifier.calculate(score_temp)
     current_score += score_temp
     

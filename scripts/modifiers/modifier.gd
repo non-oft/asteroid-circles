@@ -1,8 +1,8 @@
 extends Node
 
 func calculate(_initial) -> float:
-    print("Error: modifier lacks calculate function")
-    return 0.0
+    print("ERROR: modifier lacks calculate function")
+    return _initial
 #TODO: swap out for proper error?
 
 #path to modifier ui packed scene
@@ -178,15 +178,25 @@ var modifier_ui_description: String:
 
 
 
+#sources for signals
+var score_handler = ScoreHandler
+
+
+
 #main initialization, to be called with a ready function in any/all modifiers
 
 func modifier_initialize():
-    #bringing in ui stuff and setting initial label text:
 
+    #bringing in ui stuff:
     var modifier_ui = preload(MODIFIER_UI_PATH).instantiate()
     add_child(modifier_ui)
     modifier_ui_name_label = $"./ModifierUI/ModifierName"
     modifier_ui_description_label = $"./ModifierUI/ModifierDescription"
+
+
+    #hooking up functions to signals and priming them to prevent null values (TODO: add the rest once they're available):
+    score_handler.points_added.connect(current_score_update)
+    current_score_update(score_handler.current_score)
 
 
     #modifier shininess and quality application:
@@ -208,12 +218,10 @@ func modifier_initialize():
         modifier_quality = 0
 
 
-    #update_name_description()
-
 
 
 #function to convert an array of arbitrary strings and variables to a single string.
-#definitely feels like there should be a better way to do this nonsense but heck if I know it
+#(definitely feels like there should be a better way to do this nonsense but heck if I know it)
 func text_array_to_string(array:Array) -> String:
     var result: String
     for item in array:
@@ -253,6 +261,12 @@ func text_array_to_string(array:Array) -> String:
 
 
 
+
+#function to receive signal from score_handler and update player score dynamically
+func current_score_update(score):
+    current_score = score
+
+
 #function to update name and description of modifier, using raw input arrays and current applicable variable values
 func update_name_description():
     if modifier_ui_name_raw:
@@ -267,6 +281,8 @@ func update_name_description():
 
 
 
+#function to limit the number of decimal places of a float
+#TODO: refine at some point to do significant figures instead, or replace with another function that does that?
 func limit_decimals(input:float, decimal_places:int) -> float:
     var order_of_magnitude = 10**decimal_places
     return floorf(input*order_of_magnitude)/order_of_magnitude 
