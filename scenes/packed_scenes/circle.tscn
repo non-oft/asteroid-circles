@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bxv2hfmql2u5k"]
+[gd_scene load_steps=7 format=3 uid="uid://bxv2hfmql2u5k"]
 
 [ext_resource type="Texture2D" uid="uid://bt8ro8wm61huq" path="res://sprites/circle_temp.png" id="1_8gisg"]
 [ext_resource type="Script" path="res://scripts/circle.gd" id="1_msj54"]
+[ext_resource type="LabelSettings" uid="uid://cnfrremhxjcw1" path="res://fonts_styles_themes/modifier_text_style.tres" id="3_4pgpj"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f2x8m"]
 friction = 0.17
@@ -35,3 +36,20 @@ debug_color = Color(0.908816, 0.26701, 0.355275, 0.42)
 [node name="Sprite2D" type="Sprite2D" parent="Node2D"]
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_8gisg")
+
+[node name="SizeLabel" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "-"
+label_settings = ExtResource("3_4pgpj")
+horizontal_alignment = 1
+vertical_alignment = 1

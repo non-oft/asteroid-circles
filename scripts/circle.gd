@@ -1,26 +1,14 @@
-extends RigidBody2D
+extends "res://scripts/circle_base.gd"
 
-@onready var collision = $"./CollisionShape2D"
-@onready var sprite = $"./Node2D"
-@onready var prox_detect = $"./ProxDetect"
+
 @export var attraction_strength_mult :float = 1
 @export var repulsion_strength_mult :float = 50
 
 
 var circle_size:int:
 	set(value):
-		var circle_scale = (value*.25) +.4
-		#TODO fix magic numbers?
-		collision.scale = Vector2(circle_scale,circle_scale)
-		sprite.scale = Vector2(circle_scale,circle_scale)
-
-		var prox_scale = (value*.25) +.4
-		#TODO fix magic numbers?
-		prox_detect.scale = Vector2(prox_scale,prox_scale)
-		sprite.scale = Vector2(prox_scale,prox_scale)
-
 		circle_size = value
-		#TODO clean this up?
+		circle_physics_properties_update(circle_size)
 	
 
 
@@ -33,11 +21,11 @@ func collision_detect(body):
 			body.set_collision_mask_value(1,false)
 			self.linear_velocity = (self.linear_velocity+body.linear_velocity)/2.0
 			self.position = (self.position+body.position)/2.0
-			print("self position: ", self.position, ". colliding circle position: ", body.position, ". average: ", (self.position+body.position)/2.0)
-			print("self velocity: ", self.linear_velocity, ". colliding circle velocity: ", body.linear_velocity, ". average: ", (self.linear_velocity+body.linear_velocity)/2.0)
+			#print("self position: ", self.position, ". colliding circle position: ", body.position, ". average: ", (self.position+body.position)/2.0)
+			#print("self velocity: ", self.linear_velocity, ". colliding circle velocity: ", body.linear_velocity, ". average: ", (self.linear_velocity+body.linear_velocity)/2.0)
 			self.circle_size += 1
-			ScoreHandler.current_score += circle_size
-			print(ScoreHandler.current_score)
+			ScoreHandler.apply_score(self.position, self.circle_size)
+			#print(ScoreHandler.current_score)
 			#TODO: because velocities are being averaged after collision, behavior is a bit strange; not sure of a good fix but might be worth giving some thought
 
 
