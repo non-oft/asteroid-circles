@@ -1,8 +1,8 @@
 extends Control
 
-@onready var sprite = $"./Node2D"
-@onready var size_label = $"./SizeLabel"
 
+var sprite
+var size_label
 
 var circle_index:int
 var circle_size:int:
@@ -13,6 +13,12 @@ var circle_size:int:
 
 var scale_mult: float = .25
 var scale_addend: float = .4
+
+
+func circle_ui_initialize():
+    sprite = $Node2D
+    size_label = $SizeLabel
+
 
 func set_circle_visual_scale(_circle_size:int):
     var circle_scale = (_circle_size*scale_mult) + scale_addend
@@ -29,5 +35,3 @@ func circle_ui_properties_update(_circle_size:int):
     else:
         set_circle_visual_scale(_circle_size)
         set_circle_text(_circle_size)
-
-
