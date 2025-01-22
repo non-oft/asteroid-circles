@@ -8,6 +8,7 @@ extends CharacterBody2D
 var crush_timer:float = 0
 @export var crush_time:float = 10
 @export var crush_detect_nudge_strength:float = 20
+@onready var firing_system = $FiringSystem
 
 
 signal shot_fired
@@ -49,6 +50,7 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 	check_for_fire()
+	check_for_reload()
 
 	#crush detection and ship nudging (attempting to minimally move ship out of danger):
 	#print(crush_detect.get_overlapping_bodies().filter(func(body): return body.is_in_group("circle")))
@@ -75,6 +77,9 @@ func _physics_process(_delta: float) -> void:
 
 
 
+func check_for_reload():
+	if Input.is_action_just_pressed("fire") and firing_system.out_of_shots:
+		firing_system.circle_deck_reload()
 
 func check_for_fire():
 	if Input.is_action_just_pressed("fire"):

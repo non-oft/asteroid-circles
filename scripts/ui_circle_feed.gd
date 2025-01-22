@@ -13,7 +13,7 @@ var ui_shot_count = 0:
             else:
                 child.circle_size = -1
 
-# Called when the node enters the scene tree for the first time.
+
 func ui_circle_feed_initialize(circle_deck_input:Dictionary) -> void:
     
     circle_deck = circle_deck_input

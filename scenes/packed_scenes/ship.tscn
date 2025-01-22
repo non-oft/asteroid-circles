@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bnlxbdblgsb27"]
+[gd_scene load_steps=10 format=3 uid="uid://bnlxbdblgsb27"]
 
 [ext_resource type="Script" path="res://scripts/player_ship.gd" id="1_h4803"]
 [ext_resource type="PackedScene" uid="uid://bxv2hfmql2u5k" path="res://scenes/packed_scenes/circle.tscn" id="2_16oq7"]
 [ext_resource type="Script" path="res://scripts/firing_system.gd" id="3_7lcdw"]
 [ext_resource type="Script" path="res://scripts/score_counter.gd" id="4_ld3mo"]
 [ext_resource type="Script" path="res://scripts/ui_circle_feed.gd" id="4_ttudd"]
+[ext_resource type="LabelSettings" uid="uid://cnfrremhxjcw1" path="res://fonts_styles_themes/modifier_text_style.tres" id="5_8qd7v"]
 [ext_resource type="PackedScene" uid="uid://cv07kcxkrys4i" path="res://scenes/packed_scenes/circle_ui.tscn" id="5_eotgi"]
 [ext_resource type="PackedScene" uid="uid://c4rj1nhxck7b3" path="res://scenes/packed_scenes/modifiers/test_modifier.tscn" id="7_a7hj1"]
 
@@ -55,6 +56,19 @@ grow_horizontal = 0
 text = "test text"
 label_settings = SubResource("LabelSettings_mym6a")
 script = ExtResource("4_ld3mo")
+
+[node name="LevelCounter" type="Label" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -118.0
+offset_top = 49.0
+offset_right = -13.0
+offset_bottom = 85.0
+grow_horizontal = 0
+text = "test text"
+label_settings = ExtResource("5_8qd7v")
+horizontal_alignment = 2
 
 [node name="UI_CircleFeed" type="VBoxContainer" parent="CanvasLayer"]
 offset_left = 30.0

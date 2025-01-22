@@ -16,10 +16,20 @@ var circle_deck := {}
 var shot_count := 0
 var current_circle_size
 @onready var ui_circle_feed = $"../CanvasLayer/UI_CircleFeed"
+@onready var level_counter = $"../CanvasLayer/LevelCounter"
+var out_of_shots: bool = false
+
+var player_level: int = 0:
+    set(value):
+        player_level = value
+        level_counter.text = str(player_level)
 
 #starter deck: index is circle size, value is quantity
 #eventually should be configurable, or at least selectable; for now, just hard-coded here
-var starter_deck: Array = [10,10,10,8,6,4,2]
+var starter_deck_basic: Array = [10,10,10,8,6,4,2]
+var starter_deck_small: Array = [3,3,2,2]
+
+var current_starter_deck = starter_deck_basic
 
 
 
@@ -27,15 +37,13 @@ var starter_deck: Array = [10,10,10,8,6,4,2]
 func _ready() -> void:
     
     firing_system_initialize()
-    #for index in range(level_circle_count):
-        #var random = randi_range(0,level_circle_range)
-        #circle_deck.append(random)
+    circle_deck_shuffle()
     ui_circle_feed.ui_circle_feed_initialize(circle_deck)
 
 func firing_system_initialize():
     var index_circle_size = 0
     var current_deck_index = 0
-    for quantity in starter_deck:
+    for quantity in current_starter_deck:
         for this_circle in range(quantity):
             circle_deck[str(current_deck_index)] = {
                     "circle_size": index_circle_size,
@@ -43,18 +51,40 @@ func firing_system_initialize():
                     "quality": 0,
                     "shininess": 1
                 }
-            
-            
             current_deck_index += 1
         index_circle_size += 1
-    print(circle_deck)
-    print(circle_deck.size())
+    player_level = 0
             
 
 
+#TODO: function to reset keys, to be triggered if circles are removed from deck, to prevent any 'index' being larger than the size of the deck?
+#TODO: function to sort deck by circle size or other features?
 
+#function that shuffles the deck into a random order
+func circle_deck_shuffle():
+    var circle_deck_temp = {}
+    var current_index = 0
+    var shuffled_keys = circle_deck.keys()
+    shuffled_keys.shuffle()
+    for shuffled_index in shuffled_keys:
+        circle_deck_temp[str(current_index)] = circle_deck[str(shuffled_index)]
+        current_index += 1
+    circle_deck = circle_deck_temp
+
+
+
+#function to shuffle and reset deck
+func circle_deck_reload():
+    out_of_shots = false
+    circle_deck_shuffle()
+    ui_circle_feed.circle_deck = circle_deck
+    ui_circle_feed.ui_shot_count = 0
+    shot_count = 0
+
+
+
+#function to fire circles, called when player_ship detects player input to fire a shot
 func on_shot_fired():
-    # print("shot fired")
     if(shot_count<circle_deck.size()):
         
         var this_circle = circle.instantiate()
@@ -67,7 +97,9 @@ func on_shot_fired():
 
         shot_count += 1
         ui_circle_feed.ui_shot_count = shot_count
-        #TODO ^not updating properly?
 
     else:
+        if out_of_shots == false:
+            player_level += 1
+        out_of_shots = true
         print("out of shots")
