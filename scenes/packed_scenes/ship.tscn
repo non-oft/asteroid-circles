@@ -27,7 +27,6 @@ deceleration = 15.0
 
 [node name="FiringSystem" type="Node2D" parent="."]
 script = ExtResource("3_7lcdw")
-level_circle_count = 50
 circle = ExtResource("2_16oq7")
 
 [node name="crush_detect" type="Area2D" parent="."]

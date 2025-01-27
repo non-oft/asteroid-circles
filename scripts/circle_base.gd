@@ -17,6 +17,8 @@ var prox_addend: float = .4
 var mass_mult: float = .25
 var mass_addend: float = .4
 
+#TODO: set up global variables somewhere for all circles to pull these variables from for consistency and convenience?
+
 
 func set_circle_visual_scale(circle_size:int):
     var circle_scale = (circle_size*scale_mult) + scale_addend

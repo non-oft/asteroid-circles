@@ -13,13 +13,6 @@ var crush_timer:float = 0
 
 signal shot_fired
 
-func _ready() -> void:
-	pass
-
-func _on_body_enter(body):
-	if body.is_in_group("circle"):
-		pass
-		#TODO: use area2d's 'get_overlapping_bodies' to check for crushing instead of signals? (test)
 
 
 func _physics_process(_delta: float) -> void:
@@ -56,7 +49,7 @@ func _physics_process(_delta: float) -> void:
 	#print(crush_detect.get_overlapping_bodies().filter(func(body): return body.is_in_group("circle")))
 	if crush_detect.get_overlapping_bodies().filter(func(body): return body.is_in_group("circle")):
 		crush_timer += 1.0/60
-		print("ship is being crushed! :o ",crush_timer)
+		#print("ship is being crushed! :o ",crush_timer)
 	else:
 		if crush_timer > 0:
 			crush_timer -= crush_time/3
@@ -78,7 +71,7 @@ func _physics_process(_delta: float) -> void:
 
 
 func check_for_reload():
-	if Input.is_action_just_pressed("fire") and firing_system.out_of_shots:
+	if Input.is_action_just_pressed("reload") and firing_system.out_of_shots:
 		firing_system.circle_deck_reload()
 
 func check_for_fire():

@@ -36,10 +36,6 @@ func _ready() -> void:
 	self.body_entered.connect(collision_detect)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass
-
 func _physics_process(_delta: float) -> void:
 
 	var bodies_prox = prox_detect.get_overlapping_bodies()
@@ -60,6 +56,8 @@ func _gravitate_circles(circle):
 	var direction = self.position.direction_to(circle.position)
 	self.linear_velocity += direction * (1/distance) * attraction_strength_mult
 
+
+#unused (ship repulsion handled in player_ship as 'nudging' currently)
 func _repel_player(player):
 	var distance = self.position.distance_to(player.position)
 	var direction = self.position.direction_to(player.position)

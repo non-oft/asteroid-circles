@@ -9,12 +9,12 @@ var ui_shot_count = 0:
         var shot_count = value
         for child in get_children():
             if circle_deck.size() > shot_count+child.circle_index:
-                child.circle_size = circle_deck[str(shot_count+child.circle_index)]["circle_size"]
+                child.circle_size = circle_deck[shot_count+child.circle_index]["circle_size"]
             else:
                 child.circle_size = -1
 
 
-func ui_circle_feed_initialize(circle_deck_input:Dictionary) -> void:
+func ui_circle_feed_initialize(circle_deck_input:Array) -> void:
     
     circle_deck = circle_deck_input
     if circle:
@@ -31,7 +31,7 @@ func ui_circle_feed_initialize(circle_deck_input:Dictionary) -> void:
     for child in get_children():
         child.circle_ui_initialize()
         if circle_deck.size() > child.circle_index:
-            child.circle_size = circle_deck[str(child.circle_index)]["circle_size"]
+            child.circle_size = circle_deck[child.circle_index]["circle_size"]
         else:
             child.circle_size = -1
 

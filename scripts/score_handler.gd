@@ -1,8 +1,7 @@
 extends Node
 
-#TODO: read modifiers player has, pass into array
-var modifiers_array: Array
 
+var modifiers_array: Array
 
 
 var current_score: int:
