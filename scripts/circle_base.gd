@@ -1,10 +1,22 @@
 extends RigidBody2D
 
 
-@onready var collision = $"./CollisionShape2D"
-@onready var sprite = $"./Node2D"
-@onready var prox_detect = $"./ProxDetect"
-@onready var size_label = $"./SizeLabel"
+var collision
+var sprite
+var prox_detect
+var size_label
+var player_ship
+
+var wrap_scale = 100.0
+#default size 200.0
+
+
+func circle_initialize():
+    collision = $"./CollisionShape2D"
+    sprite = $"./Node2D"
+    prox_detect = $"./ProxDetect"
+    size_label = $"./SizeLabel"
+    player_ship = get_tree().get_root().get_node("Main/Ship")
 
 
 
@@ -54,3 +66,18 @@ func circle_ui_properties_update(circle_size:int):
     else:
         set_circle_visual_scale(circle_size)
         set_circle_text(circle_size)
+
+
+
+func wrap_position_circle():
+    var x_size = wrap_scale*7
+    var y_size = wrap_scale*6
+
+    var s_pos_x = player_ship.position.x-x_size/2
+    var s_pos_y = player_ship.position.y-y_size/2
+
+    if fposmod(position.y-s_pos_y, y_size*2) > y_size:
+        position.x = fposmod(position.x-s_pos_x+x_size/2, x_size)+s_pos_x
+    else:
+        position.x = fposmod(position.x-s_pos_x, x_size)+s_pos_x
+    position.y = fposmod(position.y-s_pos_y, y_size)+s_pos_y

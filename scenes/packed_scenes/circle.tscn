@@ -8,7 +8,7 @@
 friction = 0.17
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_natwm"]
-radius = 50.0
+radius = 120.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ix17a"]
 radius = 18.41
@@ -20,6 +20,7 @@ gravity_scale = 0.0
 contact_monitor = true
 max_contacts_reported = 8
 script = ExtResource("1_msj54")
+attraction_strength_mult = 50.0
 
 [node name="ProxDetect" type="Area2D" parent="."]
 

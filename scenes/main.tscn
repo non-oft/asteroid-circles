@@ -8,26 +8,32 @@
 [node name="environment" type="Node2D" parent="."]
 
 [node name="background1" type="Sprite2D" parent="environment"]
+position = Vector2(0, -600)
 texture = ExtResource("1_2xey5")
 
 [node name="background2" type="Sprite2D" parent="environment"]
-position = Vector2(1400, 0)
+position = Vector2(1400, -600)
 texture = ExtResource("1_2xey5")
 
 [node name="background3" type="Sprite2D" parent="environment"]
-position = Vector2(2800, 0)
+position = Vector2(-700, 600)
 texture = ExtResource("1_2xey5")
 
 [node name="background4" type="Sprite2D" parent="environment"]
-position = Vector2(-700, 1200)
+modulate = Color(0.800411, 0.890124, 0.939387, 1)
+position = Vector2(700, 600)
 texture = ExtResource("1_2xey5")
 
 [node name="background5" type="Sprite2D" parent="environment"]
-position = Vector2(700, 1200)
+position = Vector2(2100, 600)
 texture = ExtResource("1_2xey5")
 
 [node name="background6" type="Sprite2D" parent="environment"]
-position = Vector2(2100, 1200)
+position = Vector2(0, 1800)
+texture = ExtResource("1_2xey5")
+
+[node name="background7" type="Sprite2D" parent="environment"]
+position = Vector2(1400, 1800)
 texture = ExtResource("1_2xey5")
 
 [node name="Ship" parent="." instance=ExtResource("1_epkud")]

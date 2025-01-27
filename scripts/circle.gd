@@ -33,6 +33,7 @@ func collision_detect(body):
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	circle_initialize()
 	self.body_entered.connect(collision_detect)
 
 
@@ -49,6 +50,8 @@ func _physics_process(_delta: float) -> void:
 
 			#elif body.is_in_group("player"):
 				#_repel_player(body)
+	
+	wrap_position_circle()
 				
 				
 func _gravitate_circles(circle):
