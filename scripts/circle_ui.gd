@@ -11,7 +11,7 @@ var circle_size:int:
         circle_ui_properties_update(circle_size)
 
 
-var scale_mult: float = .25
+var scale_mult: float = .4
 var scale_addend: float = .4
 
 

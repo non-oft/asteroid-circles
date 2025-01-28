@@ -1,8 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bxv2hfmql2u5k"]
+[gd_scene load_steps=7 format=3 uid="uid://dyxjkilocb41p"]
 
-[ext_resource type="Texture2D" uid="uid://bt8ro8wm61huq" path="res://sprites/circle_temp.png" id="1_8gisg"]
-[ext_resource type="Script" path="res://scripts/circle.gd" id="1_msj54"]
-[ext_resource type="LabelSettings" uid="uid://cnfrremhxjcw1" path="res://fonts_styles_themes/modifier_text_style.tres" id="3_4pgpj"]
+[ext_resource type="Script" path="res://scripts/ghost_circle.gd" id="1_1d133"]
+[ext_resource type="Texture2D" uid="uid://bt8ro8wm61huq" path="res://sprites/circle_temp.png" id="2_512iq"]
+[ext_resource type="LabelSettings" uid="uid://cnfrremhxjcw1" path="res://fonts_styles_themes/modifier_text_style.tres" id="3_xqt7m"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f2x8m"]
 friction = 0.75
@@ -20,8 +20,7 @@ physics_material_override = SubResource("PhysicsMaterial_f2x8m")
 gravity_scale = 0.0
 contact_monitor = true
 max_contacts_reported = 8
-script = ExtResource("1_msj54")
-attraction_strength_mult = 0.5
+script = ExtResource("1_1d133")
 
 [node name="ProxDetect" type="Area2D" parent="."]
 
@@ -36,8 +35,9 @@ debug_color = Color(0.908816, 0.26701, 0.355275, 0.42)
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+modulate = Color(0.730747, 0.858625, 0.681697, 1)
 scale = Vector2(0.1, 0.1)
-texture = ExtResource("1_8gisg")
+texture = ExtResource("2_512iq")
 
 [node name="SizeLabel" type="Label" parent="."]
 anchors_preset = 8
@@ -52,6 +52,6 @@ offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "-"
-label_settings = ExtResource("3_4pgpj")
+label_settings = ExtResource("3_xqt7m")
 horizontal_alignment = 1
 vertical_alignment = 1

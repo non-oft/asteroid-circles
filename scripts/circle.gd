@@ -5,71 +5,72 @@ extends "res://scripts/circle_base.gd"
 @export var repulsion_strength_mult :float = 50
 
 
-var circle_size:int:
-	set(value):
-		circle_size = value
-		circle_physics_properties_update(circle_size)
-	
+#var circle_size:int:
+    #set(value):
+        #circle_size = value
+        #circle_physics_properties_update(circle_size)
+    
 
 
 
 func collision_detect(body):
-	if body.is_in_group("circle"):
-		if body.circle_size == self.circle_size and not self.is_queued_for_deletion():
-			body.queue_free()
-			body.set_collision_layer_value(1,false)
-			body.set_collision_mask_value(1,false)
-			self.linear_velocity = (self.linear_velocity+body.linear_velocity)/2.0
-			self.position = (self.position+body.position)/2.0
-			#print("self position: ", self.position, ". colliding circle position: ", body.position, ". average: ", (self.position+body.position)/2.0)
-			#print("self velocity: ", self.linear_velocity, ". colliding circle velocity: ", body.linear_velocity, ". average: ", (self.linear_velocity+body.linear_velocity)/2.0)
-			self.circle_size += 1
-			ScoreHandler.apply_score(self.position, self.circle_size)
-			#print(ScoreHandler.current_score)
-			#TODO: because velocities are being averaged after collision, behavior is a bit strange; not sure of a good fix but might be worth giving some thought
+    if body.is_in_group("circle"):
+        if body.circle_size == self.circle_size and not self.is_queued_for_deletion():
+            body.queue_free()
+            body.set_collision_layer_value(1,false)
+            body.set_collision_mask_value(1,false)
+            self.linear_velocity = (self.linear_velocity+body.linear_velocity)/2.0
+            self.position = (self.position+body.position)/2.0
+            #print("self position: ", self.position, ". colliding circle position: ", body.position, ". average: ", (self.position+body.position)/2.0)
+            #print("self velocity: ", self.linear_velocity, ". colliding circle velocity: ", body.linear_velocity, ". average: ", (self.linear_velocity+body.linear_velocity)/2.0)
+            self.circle_size += 1
+            ScoreHandler.apply_score(self.position, self.circle_size)
+            #print(ScoreHandler.current_score)
+            #TODO: because velocities are being averaged after collision, behavior is a bit strange; not sure of a good fix but might be worth giving some thought
 
 
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	circle_initialize()
-	self.body_entered.connect(collision_detect)
+    circle_initialize()
+    create_ghost_circles()
+    self.body_entered.connect(collision_detect)
 
 
 func _physics_process(_delta: float) -> void:
 
-	var bodies_prox = prox_detect.get_overlapping_bodies()
-	if bodies_prox.size() > 0:
-		for body in bodies_prox:
-			
-			if body.is_in_group("circle") and body != self:
-				_gravitate_circles(body)
-			
-			
+    var bodies_prox = prox_detect.get_overlapping_bodies()
+    if bodies_prox.size() > 0:
+        for body in bodies_prox:
+            
+            if body.is_in_group("circle") and body != self:
+                _gravitate_circles(body)
+            
+            
 
-			#elif body.is_in_group("player"):
-				#_repel_player(body)
-	
-	wrap_position_circle()
-				
-				
+            #elif body.is_in_group("player"):
+                #_repel_player(body)
+    
+    wrap_position_circle()
+                
+                
 func _gravitate_circles(circle):
-	var distance = self.position.distance_to(circle.position)
-	var direction = self.position.direction_to(circle.position)
-	self.linear_velocity += direction * (1/distance) * attraction_strength_mult
+    var distance = self.position.distance_to(circle.position)
+    var direction = self.position.direction_to(circle.position)
+    self.linear_velocity += direction * (1/distance) * attraction_strength_mult * (circle.circle_size**2)
 
 
 #unused (ship repulsion handled in player_ship as 'nudging' currently)
 func _repel_player(player):
-	var distance = self.position.distance_to(player.position)
-	var direction = self.position.direction_to(player.position)
-	var ship_velocity_add = direction * (1/distance) * repulsion_strength_mult
-	if player.velocity.x + ship_velocity_add.x < 1.5*player.max_speed and player.velocity.x + ship_velocity_add.x > 1.5*-player.max_speed:
-		player.velocity.x += ship_velocity_add.x
-	if player.velocity.y + ship_velocity_add.y < 1.5*player.max_speed and player.velocity.y + ship_velocity_add.y > 1.5*-player.max_speed:
-		player.velocity.y += ship_velocity_add.y 
+    var distance = self.position.distance_to(player.position)
+    var direction = self.position.direction_to(player.position)
+    var ship_velocity_add = direction * (1/distance) * repulsion_strength_mult
+    if player.velocity.x + ship_velocity_add.x < 1.5*player.max_speed and player.velocity.x + ship_velocity_add.x > 1.5*-player.max_speed:
+        player.velocity.x += ship_velocity_add.x
+    if player.velocity.y + ship_velocity_add.y < 1.5*player.max_speed and player.velocity.y + ship_velocity_add.y > 1.5*-player.max_speed:
+        player.velocity.y += ship_velocity_add.y 
 
-	#TODO: maybe do ship repulsion in crush detection instead, using that detection area? Much more subtle, less obtrusive/counter-intuitive
-	#than unpredictable slow drift away from circles while trying to stay still
-	#Might be good to have ship slightly push *away* circles as well, though
+    #TODO: maybe do ship repulsion in crush detection instead, using that detection area? Much more subtle, less obtrusive/counter-intuitive
+    #than unpredictable slow drift away from circles while trying to stay still
+    #Might be good to have ship slightly push *away* circles as well, though
